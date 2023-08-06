@@ -16,6 +16,7 @@ from collections import defaultdict
 from controller import CaptureThread
 
 
+# The Wireshark class is a QMainWindow subclass.
 class Wireshark(QMainWindow):
     packet_emitted = pyqtSignal(list)
 
@@ -41,9 +42,11 @@ class Wireshark(QMainWindow):
 
         # Create a toolbar
         toolbar = self.addToolBar('Toolbar')
-        captureAction = QAction(QIcon('icons/start.png'), 'Start Capture', self)
+        captureAction = QAction(
+            QIcon('icons/start.png'), 'Start Capture', self)
         stopAction = QAction(QIcon('icons/stop.png'), 'Stop Catpure', self)
-        restartAction = QAction(QIcon('icons/reload.png'), 'Restart Capture', self)
+        restartAction = QAction(
+            QIcon('icons/reload.png'), 'Restart Capture', self)
         saveAction = QAction(QIcon('icons/save.png'), 'Save Packets', self)
         aboutAction = QAction(QIcon('icons/about.png'), 'About', self)
 
@@ -117,15 +120,27 @@ class Wireshark(QMainWindow):
         self.show()
 
     def startCapture(self):
+        """
+        The function "startCapture" starts a capture thread and displays a message in the status bar
+        indicating that capturing is in progress.
+        """
         self.capture_thread.start()
         # print("starting")
         self.statusBar().showMessage('Capturing')
 
     def stopCapture(self):
+        """
+        The function `stopCapture` stops a capture thread and displays a message in the status bar.
+        """
         self.capture_thread.stop()
         self.statusBar().showMessage('Stopped')
 
     def savePackets(self):
+        """
+        The function saves captured packets to a file, either overwriting the existing file or appending
+        to it based on user confirmation.
+        :return: nothing (None).
+        """
         if not self.packet_list:
             msgBox = QMessageBox()
             msgBox.setIcon(QMessageBox.Information)
@@ -157,10 +172,14 @@ class Wireshark(QMainWindow):
     def about(self):
         msgBox = QMessageBox()
         msgBox.setWindowTitle("About Minishark")
-        msgBox.setText("Minishark v1.0\nCreated by Your Avishek Dhakal")
+        msgBox.setText("Minishark v1.0\nCreated by  Avishek Dhakal")
         msgBox.exec()
 
     def restartCapture(self):
+        """
+        The function restartCapture clears the packet list, resets the table widget, shows a capturing
+        message in the status bar, and starts the capture thread.
+        """
         self.packet_list.clear()
         self.table_widget.setRowCount(0)
         self.statusBar().showMessage('Capturing')
@@ -169,6 +188,14 @@ class Wireshark(QMainWindow):
         self.capture_thread.start()
 
     def show_packet_details(self, qmodelindex):
+        """
+        The function `show_packet_details` displays the details of a captured packet in a text field.
+        
+        :param qmodelindex: The `qmodelindex` parameter is an object that represents the index of an
+        item in a model. It is typically used in Qt frameworks to identify the position of an item in a
+        list or table view. In this case, it is used to identify the row of the selected packet in the
+        model
+        """
         row = qmodelindex.row()
         packet = self.capture_thread.capture_instance.captured_packets[row]
         packet_details = packet.show(dump=True)
@@ -176,6 +203,14 @@ class Wireshark(QMainWindow):
 
     @pyqtSlot(list)
     def packetHandler(self, packet):
+        """
+        The function `packetHandler` appends a packet to a list, adds a new row to a table widget, and
+        populates the row with the packet data.
+        
+        :param packet: The `packet` parameter is a list that represents a packet of data. It is assumed
+        to have multiple elements, and the last element is used as a key in the `packet_dict`
+        dictionary. The other elements are used to populate the columns of a table in the `table_widget`
+        """
         self.packet_list.append(packet)
         row_count = self.table_widget.rowCount()  # Get the current row count
         self.table_widget.setRowCount(row_count + 1)  # Add one new row
@@ -189,6 +224,9 @@ class Wireshark(QMainWindow):
     # @pyqtSlot()
 
     def filterPacket(self):
+        """
+        The function filters packets based on a given filter value and displays the filtered packets.
+        """
         filter_value = self.lineEdit.text()
         filter_type, filter_text = filter_value.split(" ")
         if filter_type.lower() in ['protocol', 'src', 'dst']:
@@ -206,7 +244,6 @@ class Wireshark(QMainWindow):
                         elif packet[ip_index] == filter_text:
                             filtered_packets.append(packet)
 
-
         self.textEdit.clear()
 
         # Display the filtered packets
@@ -218,4 +255,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = Wireshark()
     sys.exit(app.exec_())
+
+
+
 
