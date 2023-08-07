@@ -41,7 +41,7 @@ class WiresharkTest(unittest.TestCase):
 
     def test_filterPacket(self):
         self.wireshark.packet_dict = {'PROTOCOL': [['Time', 'src:port', 'dst:port', 'PROTOCOL']]}
-        self.wireshark.lineEdit = Mock(spec=QLineEdit)  # Create a mock QLineEdit
+        self.wireshark.lineEdit = Mock(spec=QLineEdit)  # Create a mock sQLineEdit
         self.wireshark.lineEdit.text.return_value = 'protocol PROTOCOL'
         self.wireshark.filterPacket()
 

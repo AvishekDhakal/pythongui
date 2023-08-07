@@ -28,7 +28,7 @@ class HashCrackerModel:
         self.connection.commit()
     def analyze_hash(self, hash):
         """
-        The function `analyze_hash` takes a hash as input and returns the type of hash (MD5, SHA1,
+        The function `analyze_hash takes a hash as input and returns the type of hash (MD5, SHA1,
         SHA256, SHA512) based on its length.
         
         :param hash: The "hash" parameter is a string that represents a cryptographic hash value

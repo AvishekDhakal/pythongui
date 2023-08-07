@@ -121,4 +121,4 @@ sys.exit(app.exec_())
 
 
 
-# so add a hash analyzer and add more hash options: --> do this 
+# o add a hash analyzer and add more hash options: --> do this 
