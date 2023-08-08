@@ -19,7 +19,7 @@ class PacketCapture(QObject):
         super().__init__()
         self._stop_flag = False
         self.captured_packets = []
-# so whenever a packet is captured using packet_capture method the packet_print method is called and it will emit all the packet using packet_emmited.emit function called there
+# so whenever a packet is captured using packet_capture method the packet_print method is called and it will emit all the packet using packet_emmited.emit function called there.
 
     def get_protocol_name(self, protocol):
         """

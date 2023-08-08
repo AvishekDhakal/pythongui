@@ -13,7 +13,7 @@ class HashCrackerModel:
             'SHA256': hashlib.sha256,
             'SHA512': hashlib.sha512
         }
-         # Create a connection to the SQLite database
+         # Create a connection to the SQLite database.
         # If the database doesn't exist, it will be created
         self.connection = sqlite3.connect('hashes.db')
         # Create a cursor
