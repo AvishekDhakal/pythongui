@@ -97,7 +97,7 @@ class HashCrackerGUI(QWidget):
         # Set the main layout
         self.setLayout(main_layout)
 
-        # Create the controller
+        # Create the controllers
         self.controller = HashCrackerController(self)
 
         # Connect GUI events to controller methods

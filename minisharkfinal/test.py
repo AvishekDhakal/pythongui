@@ -45,7 +45,7 @@ class WiresharkTest(unittest.TestCase):
         self.wireshark.lineEdit.text.return_value = 'protocol PROTOCOL'
         self.wireshark.filterPacket()
 
-        # Check if the textEdit contains the expected text
+        # Check if the textEdit contains the expected texts
         self.assertIn("['Time', 'src:port', 'dst:port', 'PROTOCOL']", self.wireshark.textEdit.toPlainText())
 
 if __name__ == '__main__':

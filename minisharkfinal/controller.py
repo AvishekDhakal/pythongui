@@ -10,7 +10,7 @@ class PacketEmitter(QObject):
 
     def __init__(self, capture_instance):
         """
-        The function initializes an instance of a class with a capture instance and connects a signal to
+        The function initializes ans instance of a class with a capture instance and connects a signal to
         emit packets.
         
         :param capture_instance: The `capture_instance` parameter is an instance of a class that has a
